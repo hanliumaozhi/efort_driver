@@ -12,6 +12,22 @@
 
 int main(int argc, char **argv) 
 {
+    EcatAdmin::add_motor(1, "joint_1", 1, 0, 0x000002E1, 0x00000000);
+    //
+    //EcatAdmin::slaves_dict[1]->setting_trans(double offset, double param_1, double param_2, double param_3);
+    EcatAdmin::add_motor(2, "joint_2", 2, 0, 0x000002E1, 0x00000000);
+    //EcatAdmin::slaves_dict[2]->setting_trans(double offset, double param_1, double param_2, double param_3);
+    EcatAdmin::add_motor(3, "joint_3", 3, 0, 0x000002E1, 0x00000000);
+    //EcatAdmin::slaves_dict[3]->setting_trans(double offset, double param_1, double param_2, double param_3);
+    EcatAdmin::add_motor(4, "joint_4", 4, 0, 0x000002E1, 0x00000000);
+    //EcatAdmin::slaves_dict[4]->setting_trans(double offset, double param_1, double param_2, double param_3);
+    EcatAdmin::add_motor(5, "joint_5", 5, 0, 0x000002E1, 0x00000000);
+    //EcatAdmin::slaves_dict[5]->setting_trans(double offset, double param_1, double param_2, double param_3);
+    EcatAdmin::add_motor(6, "joint_6", 6, 0, 0x000002E1, 0x00000000);
+    //EcatAdmin::slaves_dict[6]->setting_trans(double offset, double param_1, double param_2, double param_3);
+
+
+    EcatAdmin::start_for_ros_control();
     ros::init(argc, argv, "efort_driver");
 	ros::NodeHandle nh;
 
@@ -39,5 +55,6 @@ int main(int argc, char **argv)
     }
 
     spinner.stop();
+    EcatAdmin::shutdown();
     exit(0);
 }

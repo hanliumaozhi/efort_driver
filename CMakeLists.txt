@@ -16,6 +16,8 @@ add_definitions(-std=c++11)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
+set(ETHERCAT_INCLUDE_DIR /usr/local/include)
+set(ETHERCAT_LIBRARY /usr/local/lib/libethercat.so.1.0.0)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -119,6 +121,7 @@ catkin_package(
 include_directories(
     include
     ${catkin_INCLUDE_DIRS}
+    ${ETHERCAT_INCLUDE_DIR}
 )
 
 ## Declare a C++ library
@@ -197,9 +200,16 @@ add_executable(efort_new_driver
   src/efort_driver.cpp
   src/efort_hardware_interface.cpp
   include/efort_driver/efort_hardware_interface.h
+  include/efort_driver/Common.h
+  include/efort_driver/slave_config.h
+  include/efort_driver/EcatAdmin.h
+  src/EcatAdmin.cpp
+  include/efort_driver/motor.h
+  src/motor.cpp
 )
 
 add_dependencies(efort_new_driver ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(efort_new_driver
   ${catkin_LIBRARIES}
+  ${ETHERCAT_LIBRARY}
 )

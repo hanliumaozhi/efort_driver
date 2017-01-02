@@ -6,9 +6,13 @@
 #define EFORT_DRIVER_EFORT_HARDWARE_INTERFACE_H
 
 #include <ros/ros.h>
+#include <ros/console.h>
 #include <hardware_interface/joint_command_interface.h>
 #include <hardware_interface/joint_state_interface.h>
 #include <hardware_interface/robot_hw.h>
+
+//for ethercat
+#include "EcatAdmin.h"
 
 class EfortHardwareInterface : public hardware_interface::RobotHW {
 public:
@@ -39,6 +43,8 @@ protected:
     std::vector<double> joint_effort_;
 
     std::vector<double> joint_position_command_;
+
+    std::vector<uint16_t> next_command_;
 
     std::size_t num_joints_;
 
