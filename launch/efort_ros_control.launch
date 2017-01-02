@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find efort_description)/launch/upload.launch" />
+    <node name="efort_HI" pkg="efort_driver" type="efort_new_driver" output="screen" />
+
+    <rosparam file="$(find efort_driver)/config/efort_controllers.yaml" command="load"/>
+
+    <node name="ros_control_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+            output="screen" args="joint_state_controller pos_based_pos_traj_controller" />
+</launch>
