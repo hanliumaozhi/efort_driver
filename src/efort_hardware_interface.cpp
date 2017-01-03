@@ -5,6 +5,9 @@
 #include "efort_driver/efort_hardware_interface.h"
 
 
+unsigned int EfortHardwareInterface::timeout_error = 0;
+unsigned int EfortHardwareInterface::cyclic_counter = 0;
+
 EfortHardwareInterface::EfortHardwareInterface(ros::NodeHandle& nh)
 {
     nh_ = nh;
@@ -44,7 +47,7 @@ void EfortHardwareInterface::init()
 void EfortHardwareInterface::read()
 {
     //todo
-    unsigned int timeout_error = 0;
+
     ecrt_master_receive(EcatAdmin::master);
     ecrt_domain_process(EcatAdmin::domain1);
     for (std::size_t i = 1; i <= num_joints_; ++i) {
@@ -78,6 +81,12 @@ void EfortHardwareInterface::read()
 		joint_velocity_[(i-1)] = 0;
         joint_effort_[(i-1)] = 0;
 	}
+    EcatAdmin::check_domain_state();
+
+    ++cyclic_counter;
+    if (!(cyclic_counter % 500)) {
+        EcatAdmin::check_master_state();
+    }
 
 }
 

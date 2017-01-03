@@ -26,6 +26,9 @@ public:
 
 protected:
 
+    static unsigned int timeout_error;
+    static unsigned int cyclic_counter;
+
     ros::NodeHandle nh_;
 
 
